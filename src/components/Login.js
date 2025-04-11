@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SignIn from './SignIn';
-import SignUp from './SignUp';
-
+import SignUp from './SignUp'; 
 const Login = () => {
   const [signin, setsignin] = useState(true);
+  const user = useSelector((store) => store.user);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (user) navigate("/browse");
+  }, [user]);
   return (
     <div className="relative h-screen text-white">
       <div className="absolute inset-0 brightness-50 bg-cover h-screen pointer-events-none -z-10">
