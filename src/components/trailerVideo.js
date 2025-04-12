@@ -1,30 +1,22 @@
-// TrailerVideo.js
 import React from 'react';
 import useBgTrailer from './useBgTrailer';
 import { useSelector } from 'react-redux';
 
 const TrailerVideo = ({ id }) => {
-  // Fetch trailer video using movie ID
   useBgTrailer(id);
 
-  // Get trailer info from Redux store
   const trailer = useSelector((store) => store?.movie?.BgTrailer);
-
-  // YouTube video key (from TMDB)
   const videoKey = trailer?.key;
 
-  if (!videoKey) return null; // or show a loader
+  if (!videoKey) return null;
 
   return (
-    <div>
+    <div className="absolute top-0 left-0 w-screen h-screen overflow-hidden z-[-1]">
       <iframe
-        className="h-screen w-screen pointer-events-none"
-        src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&loop=1&playlist=${videoKey}&mute=1&controls=0&showinfo=0&modestbranding=1&rel=0&disablekb=1`}
-        title="Background Trailer"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-      ></iframe>
+        className="w-[130vw] h-[130vh] absolute top-[-17%] left-[-14%] pointer-events-none"
+        src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&loop=1&playlist=${videoKey}&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&disablekb=1`}
+        allow="autoplay"
+      />
     </div>
   );
 };

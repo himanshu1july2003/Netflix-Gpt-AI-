@@ -28,19 +28,19 @@ const Header = () => {
       });
     }, []);
   return (
-    <div className="h-2/12 w-screen bg-black flex justify-between z-10">
+    <div className="h-2/12 w-screen pt-2  flex justify-between absolute z-10 ">
       <div className='h-12/12 flex justify-center items-center gap-5'>
     <img
-      className="h-13 px-13 filter brightness-75 contrast-295 "
+      className="h-13 px-5 pl-12 filter brightness-75 contrast-295 "
       src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
       alt="Netflix Logo"
     />
-    <a href='' className='text-white text-[14px]'>Home</a>
-    <a href='' className='text-white text-[14px]'>TV Shows</a>
-    <a href='' className='text-white text-[14px]'>Movies</a>
-    <a href='' className='text-white text-[14px]'>New & Popular</a>
-    <a href='' className='text-white text-[14px]'>My List</a>
-    <a href='' className='text-white text-[14px]'>Browse by Languages</a>
+    <a href='' className='text-white text-[15px]'>Home</a>
+    <a href='' className='text-white text-[15px]'>TV Shows</a>
+    <a href='' className='text-white text-[15px]'>Movies</a>
+    <a href='' className='text-white text-[15px]'>New & Popular</a>
+    <a href='' className='text-white text-[15px]'>My List</a>
+    <a href='' className='text-white text-[15px]'>Browse by Languages</a>
     </div>
     <div className='flex gap-4 items-center mx-7'>
 {user && (
