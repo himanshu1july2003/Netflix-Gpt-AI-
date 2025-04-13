@@ -6,11 +6,24 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useDispatch } from "react-redux";
+import { changeLanguage, changeSearchState } from '../utils/searchSlice';
+import { SUPPORTED_LANGUAGES } from '../utils/Contants';
 
 const Header = () => {
+  
   const dispatch=useDispatch()
-    const user = useSelector((store) => store.user);
-    const navigate=useNavigate()
+  const showLang=useSelector(store=>store.search.searchState)
+  const handleLanguage=(e)=>{
+    dispatch(changeLanguage(e.target.value))
+  }
+
+  const user = useSelector((store) => store.user);
+  const navigate=useNavigate()
+    const handleSearch=()=>{
+      console.log("clicked")
+      dispatch(changeSearchState())
+    }
+
     const handleSignout=()=>{
         signOut(auth).then(()=>{
             navigate("/")
@@ -28,7 +41,8 @@ const Header = () => {
       });
     }, []);
   return (
-    <div className="h-2/12 w-screen pt-2  flex justify-between absolute z-10 ">
+    <div className="h-2/12 w-screen pt-2 flex justify-between absolute z-50 pointer-events-auto">
+
       <div className='h-12/12 flex justify-center items-center gap-5'>
     <img
       className="h-13 px-5 pl-12 filter brightness-75 contrast-295 "
@@ -42,7 +56,19 @@ const Header = () => {
     <a href='' className='text-white text-[15px]'>My List</a>
     <a href='' className='text-white text-[15px]'>Browse by Languages</a>
     </div>
-    <div className='flex gap-4 items-center mx-7'>
+    <div className=' flex gap-4 items-center mx-7  relative pointer-events-auto z-[8]'>
+    {showLang && <select onChange={handleLanguage}
+      className="h-10 w-30 bg-black text-white border border-gray-500 rounded px-3"
+    >
+    {SUPPORTED_LANGUAGES.map((l)=>(<option key={l.identifier} value={l.identifier}>{l.name}</option>))}
+
+    {/* <option value="en">English</option>
+      <option value="hi">Hindi</option>
+      <option value="es">Spanish</option> */}
+    </select>
+}
+    <button  type="button" onClick={handleSearch} className='cursor-pointer p-3 px-5 text-black bg-amber-300 items-center flex rounded-md font-extrabold'>
+      {showLang? "Homepage":"AI Search🔍" }</button>
 {user && (
     <img
       className='w-8 h-8'
